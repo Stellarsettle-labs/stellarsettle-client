@@ -9,20 +9,18 @@
   <body>
     <div class="dashboard-shell">
       <aside class="sidebar" aria-label="Workspace">
-        <section class="workspace-card">
-          <div class="workspace-top">
-            <strong>stellarsettle</strong>
-            <button class="chevron" aria-label="Switch workspace">⌄</button>
-          </div>
-          <div class="network-tags">
-            <span>Stellar</span>
-            <span>Testnet</span>
-          </div>
-        </section>
-
         <section class="profile-block">
-          <h1>StellarSettle</h1>
-          <p>Saturday 16th of May</p>
+          <div class="brand-lockup">
+            <span class="brand-mark" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+                <path d="M 64 192 L 256 192 L 256 256 L 0 256 L 0 0 L 64 0 Z M 256 160 L 96 160 L 96 0 L 256 0 Z M 176 48 C 158.327 48 144 62.327 144 80 C 144 97.673 158.327 112 176 112 C 193.673 112 208 97.673 208 80 C 208 62.327 193.673 48 176 48 Z" fill="currentColor"></path>
+              </svg>
+            </span>
+            <div>
+              <h1>StellarSettle</h1>
+              <p>USDC invoice rails</p>
+            </div>
+          </div>
         </section>
 
         <nav class="nav-list">
@@ -55,20 +53,13 @@
         <header class="topbar">
           <h2>StellarSettle</h2>
           <div class="topbar-actions">
-            <button class="icon-button" aria-label="Notifications">♢</button>
-            <div class="divider"></div>
-            <span>Live Mode</span>
-            <label class="switch">
-              <input type="checkbox" />
-              <i></i>
-            </label>
+            <button class="report-button">Get Report</button>
           </div>
         </header>
 
         <section class="view active" id="dashboard">
           <div class="page-intro">
             <p>Here’s everything happening with your Stellar USDC invoices.</p>
-            <button class="report-button">Get Report</button>
           </div>
 
           <section class="metric-grid" aria-label="Payment metrics">
