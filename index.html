@@ -7,284 +7,254 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="app-shell">
+    <div class="dashboard-shell">
       <aside class="sidebar" aria-label="Workspace">
-        <div class="brand">
-          <div class="brand-mark" aria-hidden="true">
-            <span></span>
+        <section class="workspace-card">
+          <div class="workspace-top">
+            <strong>stellarsettle</strong>
+            <button class="chevron" aria-label="Switch workspace">⌄</button>
           </div>
-          <div>
-            <strong>StellarSettle</strong>
-            <small>USDC invoice rails</small>
+          <div class="network-tags">
+            <span>Stellar</span>
+            <span>Testnet</span>
           </div>
-        </div>
+        </section>
+
+        <section class="profile-block">
+          <h1>StellarSettle</h1>
+          <p>Saturday 16th of May</p>
+        </section>
 
         <nav class="nav-list">
           <button class="nav-item active" data-view="dashboard">
-            <span>01</span>
-            Dashboard
+            <span>▣</span>
+            Overview
           </button>
           <button class="nav-item" data-view="invoice">
-            <span>02</span>
-            Invoice
+            <span>□</span>
+            Invoices
+            <b>4</b>
           </button>
           <button class="nav-item" data-view="settlement">
-            <span>03</span>
-            Settlement
+            <span>◷</span>
+            Settlements
+            <b>2</b>
+          </button>
+          <button class="nav-item">
+            <span>▱</span>
+            Addresses
           </button>
           <button class="nav-item" data-view="api">
-            <span>04</span>
-            API
+            <span>›_</span>
+            Developers
           </button>
         </nav>
       </aside>
 
-      <main>
-        <header class="hero">
-          <div>
-            <p class="eyebrow">Stellar USDC merchant toolkit</p>
-            <h1>Invoice links that settle globally in seconds.</h1>
-            <p class="lede">
-              StellarSettle helps freelancers and small teams create USDC invoices, share payment
-              links, track settlement, and export clean receipts for accounting.
-            </p>
-            <div class="actions">
-              <button class="primary-button" id="heroCreate">Create invoice</button>
-              <button class="ghost-button" data-view-link="settlement">View settlement rail</button>
-            </div>
+      <main class="main-panel">
+        <header class="topbar">
+          <h2>StellarSettle</h2>
+          <div class="topbar-actions">
+            <button class="icon-button" aria-label="Notifications">♢</button>
+            <div class="divider"></div>
+            <span>Live Mode</span>
+            <label class="switch">
+              <input type="checkbox" />
+              <i></i>
+            </label>
           </div>
-          <section class="receipt-card" aria-label="Payment receipt preview">
-            <div class="receipt-top">
-              <span>Invoice paid</span>
-              <strong>SS-2048</strong>
-            </div>
-            <div class="receipt-amount">$1,240.00</div>
-            <div class="receipt-line">
-              <span>Asset</span>
-              <strong>USDC</strong>
-            </div>
-            <div class="receipt-line">
-              <span>Network</span>
-              <strong>Stellar</strong>
-            </div>
-            <div class="receipt-line">
-              <span>Settlement</span>
-              <strong>2.8 sec</strong>
-            </div>
-          </section>
         </header>
 
         <section class="view active" id="dashboard">
-          <div class="dashboard-grid">
-            <section class="panel invoice-panel">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">Invoice desk</p>
-                  <h2>Payment link builder</h2>
-                </div>
-                <span class="pill">USDC</span>
-              </div>
-
-              <div class="invoice-form">
-                <label>
-                  Client
-                  <input id="clientName" value="Kora Design Studio" />
-                </label>
-                <label>
-                  Amount
-                  <input id="invoiceAmount" value="1240.00" inputmode="decimal" />
-                </label>
-                <label>
-                  Due date
-                  <input id="dueDate" value="2026-06-15" />
-                </label>
-                <button class="primary-button" id="createInvoice">Generate link</button>
-              </div>
-
-              <div class="payment-link" id="paymentLink">
-                https://pay.stellarsettle.dev/i/ss-2048
-              </div>
-            </section>
-
-            <section class="panel status-panel">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">Live status</p>
-                  <h2>Settlement queue</h2>
-                </div>
-              </div>
-              <div class="status-list">
-                <article>
-                  <span class="status-dot paid"></span>
-                  <div>
-                    <strong>SS-2048</strong>
-                    <small>Paid by Kora Design Studio</small>
-                  </div>
-                  <b>$1,240</b>
-                </article>
-                <article>
-                  <span class="status-dot pending"></span>
-                  <div>
-                    <strong>SS-2047</strong>
-                    <small>Waiting for wallet signature</small>
-                  </div>
-                  <b>$680</b>
-                </article>
-                <article>
-                  <span class="status-dot review"></span>
-                  <div>
-                    <strong>SS-2046</strong>
-                    <small>Receipt export ready</small>
-                  </div>
-                  <b>$310</b>
-                </article>
-              </div>
-            </section>
-
-            <section class="panel flow-panel">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">Payment flow</p>
-                  <h2>From invoice to merchant wallet.</h2>
-                </div>
-              </div>
-              <div class="flow-steps">
-                <article>
-                  <span>1</span>
-                  <strong>Create invoice</strong>
-                  <small>Amount, client, memo, and due date.</small>
-                </article>
-                <article>
-                  <span>2</span>
-                  <strong>Share link</strong>
-                  <small>Client pays with USDC on Stellar.</small>
-                </article>
-                <article>
-                  <span>3</span>
-                  <strong>Confirm settlement</strong>
-                  <small>Webhook updates merchant backend.</small>
-                </article>
-                <article>
-                  <span>4</span>
-                  <strong>Export receipt</strong>
-                  <small>Accounting record with transaction hash.</small>
-                </article>
-              </div>
-            </section>
+          <div class="page-intro">
+            <p>Here’s everything happening with your Stellar USDC invoices.</p>
+            <button class="report-button">Get Report</button>
           </div>
+
+          <section class="metric-grid" aria-label="Payment metrics">
+            <article class="metric-card">
+              <div class="metric-label">
+                <span>$</span>
+                Cumulative Settled
+              </div>
+              <strong>$38,940.20</strong>
+              <small class="positive">+14% vs last week</small>
+            </article>
+            <article class="metric-card">
+              <div class="metric-label">
+                <span>#</span>
+                Pending Invoices
+              </div>
+              <strong>$2,208.78</strong>
+              <a href="#invoice" data-view-link="invoice">Review invoices</a>
+            </article>
+            <article class="metric-card">
+              <div class="metric-label">
+                <span>▦</span>
+                Active Clients
+              </div>
+              <strong>35</strong>
+              <small class="positive">+10 new this week</small>
+            </article>
+            <article class="metric-card">
+              <div class="metric-label">
+                <span>▤</span>
+                Settlement Wallets
+              </div>
+              <strong>6</strong>
+              <small class="positive">+1 new this week</small>
+            </article>
+          </section>
+
+          <section class="wallet-section">
+            <div>
+              <h3>Merchant Wallets</h3>
+              <div class="wallet-stack" aria-label="Merchant wallet chips">
+                <span>B</span>
+                <span>K</span>
+                <span>U</span>
+                <span>A</span>
+                <span>F</span>
+                <span>+1</span>
+              </div>
+              <p>Hover on any wallet to get a quick settlement snapshot</p>
+            </div>
+            <button class="green-button" id="heroCreate">New Invoice</button>
+          </section>
+
+          <section class="table-section">
+            <div class="section-heading">
+              <h3>Invoice distribution</h3>
+              <div class="time-filter" aria-label="Time range">
+                <span>Showing data for</span>
+                <button class="active">All time</button>
+                <button>1Y</button>
+                <button>1M</button>
+                <button>1W</button>
+                <button>1D</button>
+              </div>
+            </div>
+            <div class="data-table" role="table" aria-label="Invoice distribution">
+              <div class="table-row table-head" role="row">
+                <span>#</span>
+                <span>Client</span>
+                <span>Memo</span>
+                <span>Status</span>
+                <span>Balance</span>
+                <span>$ Value</span>
+              </div>
+              <div class="table-row" role="row">
+                <span>01</span>
+                <span>Kora Design Studio</span>
+                <span>SETTLE-SS-2048</span>
+                <span class="status paid">Paid</span>
+                <span>1,240 USDC</span>
+                <span>$1,240.00</span>
+              </div>
+              <div class="table-row" role="row">
+                <span>02</span>
+                <span>Blue Finch Media</span>
+                <span>SETTLE-SS-2047</span>
+                <span class="status pending">Pending</span>
+                <span>680 USDC</span>
+                <span>$680.00</span>
+              </div>
+              <div class="table-row" role="row">
+                <span>03</span>
+                <span>Atlas Studio</span>
+                <span>SETTLE-SS-2046</span>
+                <span class="status review">Receipt</span>
+                <span>310 USDC</span>
+                <span>$310.00</span>
+              </div>
+            </div>
+          </section>
         </section>
 
         <section class="view" id="invoice">
-          <div class="two-column">
-            <section class="panel">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">Invoice preview</p>
-                  <h2>Client-facing checkout</h2>
-                </div>
-              </div>
-              <div class="checkout-preview">
-                <div class="checkout-header">
-                  <div class="client-avatar">K</div>
-                  <div>
-                    <strong>Kora Design Studio</strong>
-                    <span>Invoice SS-2048</span>
-                  </div>
-                </div>
-                <div class="checkout-total">
-                  <span>Total due</span>
-                  <strong id="previewAmount">$1,240.00</strong>
-                </div>
-                <div class="checkout-meta">
-                  <span>USDC on Stellar</span>
-                  <span>Memo required</span>
-                </div>
-                <button class="pay-button">Pay invoice</button>
-              </div>
+          <div class="page-intro">
+            <p>Create a payment link for a client and track the expected Stellar memo.</p>
+            <button class="report-button" id="createInvoice">Generate Link</button>
+          </div>
+          <div class="split-grid">
+            <section class="dark-panel">
+              <p class="eyebrow">Invoice builder</p>
+              <label>
+                Client
+                <input id="clientName" value="Kora Design Studio" />
+              </label>
+              <label>
+                Amount
+                <input id="invoiceAmount" value="1240.00" inputmode="decimal" />
+              </label>
+              <label>
+                Due date
+                <input id="dueDate" value="2026-06-15" />
+              </label>
+              <div class="payment-link" id="paymentLink">https://pay.stellarsettle.dev/i/ss-2048</div>
             </section>
-            <section class="panel">
-              <div class="panel-heading">
+            <section class="checkout-card">
+              <div class="checkout-header">
+                <span>K</span>
                 <div>
-                  <p class="eyebrow">Merchant controls</p>
-                  <h2>Invoice settings</h2>
+                  <strong>Kora Design Studio</strong>
+                  <small>Invoice SS-2048</small>
                 </div>
               </div>
-              <div class="setting-list">
-                <label><input type="checkbox" checked /> Require memo match</label>
-                <label><input type="checkbox" checked /> Send settlement webhook</label>
-                <label><input type="checkbox" /> Auto-export CSV receipt</label>
-                <label><input type="checkbox" checked /> Expire unpaid link after due date</label>
+              <div class="checkout-total">
+                <small>Total due</small>
+                <strong id="previewAmount">$1,240.00</strong>
               </div>
+              <button class="green-button">Pay invoice</button>
             </section>
           </div>
         </section>
 
         <section class="view" id="settlement">
-          <div class="two-column">
-            <section class="panel settlement-map">
-              <div class="rail-map" aria-hidden="true">
-                <div class="rail-node invoice">INV</div>
-                <div class="rail-node stellar">XLM</div>
-                <div class="rail-node merchant">USDC</div>
-                <div class="rail-line one"></div>
-                <div class="rail-line two"></div>
-              </div>
-            </section>
-            <section class="panel">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">Settlement model</p>
-                  <h2>Track the payment without holding customer funds.</h2>
-                </div>
-              </div>
-              <p class="panel-copy">
-                The server watches Stellar payments, validates invoice amount and memo, records
-                settlement state, then notifies the merchant app through a webhook-style callback.
-              </p>
-              <div class="metric-row">
-                <article><span>Target fee</span><strong>&lt;$0.01</strong></article>
-                <article><span>Asset</span><strong>USDC</strong></article>
-                <article><span>Mode</span><strong>Testnet</strong></article>
-              </div>
-            </section>
+          <div class="page-intro">
+            <p>Settlement records connect invoice memos to Stellar transaction hashes.</p>
+            <button class="report-button">Export CSV</button>
           </div>
+          <section class="timeline-panel">
+            <article>
+              <span>01</span>
+              <strong>Invoice created</strong>
+              <small>Client receives a USDC payment link.</small>
+            </article>
+            <article>
+              <span>02</span>
+              <strong>Memo matched</strong>
+              <small>Payment watcher confirms amount and memo.</small>
+            </article>
+            <article>
+              <span>03</span>
+              <strong>Webhook sent</strong>
+              <small>Merchant backend receives settlement proof.</small>
+            </article>
+            <article>
+              <span>04</span>
+              <strong>Receipt exported</strong>
+              <small>Accounting record includes transaction hash.</small>
+            </article>
+          </section>
         </section>
 
         <section class="view" id="api">
-          <div class="two-column">
-            <section class="panel">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">Typed API</p>
-                  <h2>Create an invoice</h2>
-                </div>
-              </div>
-              <pre class="code-block"><code>await fetch("/invoices", {
+          <div class="page-intro">
+            <p>Typed routes for invoice creation, settlement events, and Stellar webhook intake.</p>
+            <button class="report-button">Copy Snippet</button>
+          </div>
+          <section class="code-panel">
+            <pre><code>await fetch("/invoices", {
   method: "POST",
   body: JSON.stringify({
     client: "Kora Design Studio",
     amount: "1240.00",
     asset: "USDC",
-    settlementAddress: "GBD..."
+    dueDate: "2026-06-15"
   })
 });</code></pre>
-            </section>
-            <section class="panel">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">Routes</p>
-                  <h2>Server surface</h2>
-                </div>
-              </div>
-              <ul class="route-list">
-                <li><span>GET</span> /health</li>
-                <li><span>GET</span> /invoices</li>
-                <li><span>POST</span> /invoices</li>
-                <li><span>POST</span> /settlements</li>
-                <li><span>POST</span> /webhooks/stellar</li>
-              </ul>
-            </section>
-          </div>
+          </section>
         </section>
       </main>
     </div>

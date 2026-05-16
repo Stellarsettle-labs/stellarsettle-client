@@ -59,9 +59,12 @@ async function createInvoice(): Promise<void> {
   linkBox.textContent = "Generating Stellar USDC payment link...";
 
   try {
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 900);
     const response = await fetch(`${API_BASE}/invoices`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      signal: controller.signal,
       body: JSON.stringify({
         client,
         amount,
@@ -69,6 +72,7 @@ async function createInvoice(): Promise<void> {
         asset: "USDC"
       })
     });
+    window.clearTimeout(timeout);
 
     if (!response.ok) {
       throw new Error(`API returned ${response.status}`);
@@ -86,4 +90,3 @@ async function createInvoice(): Promise<void> {
 
 getElement<HTMLButtonElement>("createInvoice").addEventListener("click", createInvoice);
 getElement<HTMLButtonElement>("heroCreate").addEventListener("click", () => showView("invoice"));
-

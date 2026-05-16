@@ -40,9 +40,12 @@ async function createInvoice() {
     const linkBox = getElement("paymentLink");
     linkBox.textContent = "Generating Stellar USDC payment link...";
     try {
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 900);
         const response = await fetch(`${API_BASE}/invoices`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            signal: controller.signal,
             body: JSON.stringify({
                 client,
                 amount,
@@ -50,6 +53,7 @@ async function createInvoice() {
                 asset: "USDC"
             })
         });
+        window.clearTimeout(timeout);
         if (!response.ok) {
             throw new Error(`API returned ${response.status}`);
         }
