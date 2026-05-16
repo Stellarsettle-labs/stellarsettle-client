@@ -2,6 +2,8 @@
 
 Invoice, payment link, and settlement rails for Stellar USDC merchants and freelancers.
 
+StellarSettle is a responsive TypeScript client for creating invoices, sharing Stellar USDC payment links, and tracking settlement state.
+
 ## Run
 
 ```powershell
