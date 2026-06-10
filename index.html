@@ -3,241 +3,461 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StellarSettle</title>
+    <title>StellarSettle — USDC invoice rails</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="dashboard-shell">
+      <!-- Sidebar Navigation -->
       <aside class="sidebar" aria-label="Workspace">
         <section class="profile-block">
-          <div class="brand-lockup">
-            <span class="brand-mark" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
-                <path d="M 64 192 L 256 192 L 256 256 L 0 256 L 0 0 L 64 0 Z M 256 160 L 96 160 L 96 0 L 256 0 Z M 176 48 C 158.327 48 144 62.327 144 80 C 144 97.673 158.327 112 176 112 C 193.673 112 208 97.673 208 80 C 208 62.327 193.673 48 176 48 Z" fill="currentColor"></path>
-              </svg>
-            </span>
-            <div>
-              <h1>StellarSettle</h1>
-              <p>USDC invoice rails</p>
-            </div>
+          <div class="brand-mark" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="6 2 18 2 22 6 22 18 18 22 6 22 2 18 2 6 6 2"></polygon>
+              <polyline points="9 10 12 13 15 10"></polyline>
+            </svg>
           </div>
+          <div class="brand-info">
+            <h1>StellarSettle</h1>
+            <p>USDC invoice rails</p>
+          </div>
+          <span class="chevron" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </span>
         </section>
 
-        <nav class="nav-list">
+        <div class="sidebar-search">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" placeholder="Search anything" aria-label="Search" id="globalSearch" />
+          <span class="shortcut">⌘K</span>
+        </div>
+
+        <nav class="nav-list" aria-label="Primary navigation">
           <button class="nav-item active" data-view="dashboard">
-            <span>▣</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" /><rect x="14" y="3" width="7" height="5" /><rect x="14" y="12" width="7" height="9" /><rect x="3" y="16" width="7" height="5" /></svg>
             Overview
           </button>
           <button class="nav-item" data-view="invoice">
-            <span>□</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" /><line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" /></svg>
             Invoices
-            <b>4</b>
+            <b id="sidebarInvoiceCount">3</b>
           </button>
           <button class="nav-item" data-view="settlement">
-            <span>◷</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
             Settlements
-            <b>2</b>
+            <b id="sidebarSettlementCount">1</b>
           </button>
-          <button class="nav-item">
-            <span>▱</span>
+          <button class="nav-item" data-view="addresses">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" ry="2" /><line x1="12" y1="10" x2="12" y2="10.01" /><line x1="12" y1="14" x2="12" y2="14.01" /><line x1="16" y1="12" x2="20" y2="12" /></svg>
             Addresses
           </button>
           <button class="nav-item" data-view="api">
-            <span>›_</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
             Developers
+          </button>
+
+          <div style="height: 1px; background: var(--border); margin: 12px 0;"></div>
+
+          <!-- Dummy mockup sidebar links -->
+          <button class="nav-item disabled" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Proposals
+          </button>
+          <button class="nav-item disabled" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            Contracts
+          </button>
+          <button class="nav-item disabled" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></rect><line x1="8" y1="2" x2="8" y2="6"></rect><line x1="3" y1="10" x2="21" y2="10"></rect></svg>
+            Meetings
+          </button>
+          <button class="nav-item disabled" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="14.83" x2="9.17" y2="19.07"></line></svg>
+            Service & product
+          </button>
+          <button class="nav-item disabled" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Customers
+          </button>
+          <button class="nav-item disabled" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            Staff
           </button>
         </nav>
       </aside>
 
+      <!-- Main Panel -->
       <main class="main-panel">
         <header class="topbar">
-          <h2>StellarSettle</h2>
+          <div class="breadcrumb" id="topbarBreadcrumb">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" /><rect x="14" y="3" width="7" height="5" /><rect x="14" y="12" width="7" height="9" /><rect x="3" y="16" width="7" height="5" /></svg>
+            <span>Overview</span>
+          </div>
           <div class="topbar-actions">
-            <button class="report-button">Get Report</button>
+            <button class="btn btn-secondary" id="globalNewInvoiceBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              New Invoice
+            </button>
           </div>
         </header>
 
+        <!-- View 1: Overview / Dashboard -->
         <section class="view active" id="dashboard">
-          <div class="page-intro">
-            <p>Here’s everything happening with your Stellar USDC invoices.</p>
+          <div class="view-header-flex">
+            <div class="view-title-block">
+              <h2>Overview</h2>
+              <p>Here’s everything happening with your Stellar USDC invoices.</p>
+            </div>
           </div>
 
-          <section class="metric-grid" aria-label="Payment metrics">
+          <section class="metrics-grid" aria-label="Payment metrics">
             <article class="metric-card">
-              <div class="metric-label">
-                <span>$</span>
-                Cumulative Settled
+              <div class="icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
               </div>
-              <strong>$38,940.20</strong>
-              <small class="positive">+14% vs last week</small>
+              <div class="card-info">
+                <span class="label">Cumulative Settled</span>
+                <strong class="value" id="cumulativeSettledVal">$38,940.20</strong>
+                <small class="subtext positive">+14% vs last week</small>
+              </div>
             </article>
             <article class="metric-card">
-              <div class="metric-label">
-                <span>#</span>
-                Pending Invoices
+              <div class="icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
               </div>
-              <strong>$2,208.78</strong>
-              <a href="#invoice" data-view-link="invoice">Review invoices</a>
+              <div class="card-info">
+                <span class="label">Pending Invoices</span>
+                <strong class="value" id="pendingInvoicesVal">$2,208.78</strong>
+                <small class="subtext link" id="reviewInvoicesLink" data-view-link="invoice">Review invoices</small>
+              </div>
             </article>
             <article class="metric-card">
-              <div class="metric-label">
-                <span>▦</span>
-                Active Clients
+              <div class="icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
               </div>
-              <strong>35</strong>
-              <small class="positive">+10 new this week</small>
+              <div class="card-info">
+                <span class="label">Active Clients</span>
+                <strong class="value">35</strong>
+                <small class="subtext positive">+10 new this week</small>
+              </div>
             </article>
             <article class="metric-card">
-              <div class="metric-label">
-                <span>▤</span>
-                Settlement Wallets
+              <div class="icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" ry="2" /><line x1="12" y1="10" x2="12" y2="10.01" /><line x1="12" y1="14" x2="12" y2="14.01" /><line x1="16" y1="12" x2="20" y2="12" /></svg>
               </div>
-              <strong>6</strong>
-              <small class="positive">+1 new this week</small>
+              <div class="card-info">
+                <span class="label">Settlement Wallets</span>
+                <strong class="value">6</strong>
+                <small class="subtext positive">Testnet rails active</small>
+              </div>
             </article>
           </section>
 
-          <section class="wallet-section">
-            <div>
-              <h3>Merchant Wallets</h3>
-              <div class="wallet-stack" aria-label="Merchant wallet chips">
-                <span>B</span>
-                <span>K</span>
-                <span>U</span>
-                <span>A</span>
-                <span>F</span>
-                <span>+1</span>
-              </div>
-              <p>Hover on any wallet to get a quick settlement snapshot</p>
-            </div>
-            <button class="green-button" id="heroCreate">New Invoice</button>
-          </section>
-
-          <section class="table-section">
-            <div class="section-heading">
-              <h3>Invoice distribution</h3>
-              <div class="time-filter" aria-label="Time range">
-                <span>Showing data for</span>
+          <!-- SVG Chart block -->
+          <section class="chart-section">
+            <header class="chart-header">
+              <h3>Settled volume trend</h3>
+              <div class="chart-filters" aria-label="Time range">
                 <button class="active">All time</button>
                 <button>1Y</button>
                 <button>1M</button>
                 <button>1W</button>
                 <button>1D</button>
               </div>
-            </div>
-            <div class="data-table" role="table" aria-label="Invoice distribution">
-              <div class="table-row table-head" role="row">
-                <span>#</span>
-                <span>Client</span>
-                <span>Memo</span>
-                <span>Status</span>
-                <span>Balance</span>
-                <span>$ Value</span>
-              </div>
-              <div class="table-row" role="row">
-                <span>01</span>
-                <span>Kora Design Studio</span>
-                <span>SETTLE-SS-2048</span>
-                <span class="status paid">Paid</span>
-                <span>1,240 USDC</span>
-                <span>$1,240.00</span>
-              </div>
-              <div class="table-row" role="row">
-                <span>02</span>
-                <span>Blue Finch Media</span>
-                <span>SETTLE-SS-2047</span>
-                <span class="status pending">Pending</span>
-                <span>680 USDC</span>
-                <span>$680.00</span>
-              </div>
-              <div class="table-row" role="row">
-                <span>03</span>
-                <span>Atlas Studio</span>
-                <span>SETTLE-SS-2046</span>
-                <span class="status review">Receipt</span>
-                <span>310 USDC</span>
-                <span>$310.00</span>
-              </div>
+            </header>
+            <div class="chart-wrapper">
+              <svg class="chart-svg" viewBox="0 0 800 160" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="rgba(37, 99, 235, 0.15)" />
+                    <stop offset="100%" stop-color="rgba(37, 99, 235, 0.0)" />
+                  </linearGradient>
+                </defs>
+                <path d="M 0 140 Q 133 120 266 90 T 532 50 T 800 20 L 800 160 L 0 160 Z" fill="url(#chartGradient)"></path>
+                <path d="M 0 140 Q 133 120 266 90 T 532 50 T 800 20" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"></path>
+                <circle cx="266" cy="90" r="5" fill="var(--accent)" stroke="#ffffff" stroke-width="2"></circle>
+                <circle cx="532" cy="50" r="5" fill="var(--accent)" stroke="#ffffff" stroke-width="2"></circle>
+                <circle cx="800" cy="20" r="5" fill="var(--accent)" stroke="#ffffff" stroke-width="2"></circle>
+              </svg>
             </div>
           </section>
+
+          <section class="wallets-card">
+            <div class="info-side">
+              <h3>Merchant Wallets</h3>
+              <p>Hover on any wallet to get a quick settlement snapshot.</p>
+            </div>
+            <div class="stack-side">
+              <div class="wallet-avatars" aria-label="Merchant wallet chips">
+                <span class="wallet-avatar-chip color-1" title="Wallet B - Main settlement">B</span>
+                <span class="wallet-avatar-chip color-2" title="Wallet K - Secondary">K</span>
+                <span class="wallet-avatar-chip color-3" title="Wallet U - Utility">U</span>
+                <span class="wallet-avatar-chip color-4" title="Wallet A - Alternate">A</span>
+                <span class="wallet-avatar-chip color-5" title="Wallet F - Fee wallet">F</span>
+                <span class="wallet-avatar-chip more">+1</span>
+              </div>
+              <button class="btn btn-primary" id="heroCreate">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                New Invoice
+              </button>
+            </div>
+          </section>
+
+          <!-- Distribution data-table -->
+          <div class="view-title-block" style="margin-bottom: 16px;">
+            <h3 style="margin:0; font-family: var(--font-heading); font-size:1.1rem;">Invoice distribution</h3>
+          </div>
+          <div class="table-container">
+            <table class="data-table" role="table" aria-label="Invoice distribution">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Client</th>
+                  <th>Memo</th>
+                  <th>Status</th>
+                  <th>Balance</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody id="overviewInvoiceTableBody">
+                <!-- Populated dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
         </section>
 
+        <!-- View 2: Invoices List (Mockup view) -->
         <section class="view" id="invoice">
-          <div class="page-intro">
-            <p>Create a payment link for a client and track the expected Stellar memo.</p>
-            <button class="report-button" id="createInvoice">Generate Link</button>
+          <div class="view-header-flex">
+            <div class="view-title-block">
+              <h2>Invoices</h2>
+              <p>Track and manage all your invoices.</p>
+            </div>
+            <button class="btn btn-primary" id="invoicesViewCreateBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              New Invoice
+            </button>
           </div>
-          <div class="split-grid">
-            <section class="dark-panel">
-              <p class="eyebrow">Invoice builder</p>
-              <label>
-                Client
-                <input id="clientName" value="Kora Design Studio" />
-              </label>
-              <label>
-                Amount
-                <input id="invoiceAmount" value="1240.00" inputmode="decimal" />
-              </label>
-              <label>
-                Due date
-                <input id="dueDate" value="2026-06-15" />
-              </label>
-              <div class="payment-link" id="paymentLink">https://pay.stellarsettle.dev/i/ss-2048</div>
-            </section>
-            <section class="checkout-card">
-              <div class="checkout-header">
-                <span>K</span>
-                <div>
-                  <strong>Kora Design Studio</strong>
-                  <small>Invoice SS-2048</small>
+
+          <!-- Cards identical to mockup -->
+          <section class="metrics-grid" aria-label="Invoice status metrics">
+            <article class="metric-card">
+              <div class="icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" ry="2" /><line x1="2" y1="10" x2="22" y2="10" /></svg>
+              </div>
+              <div class="card-info">
+                <span class="label">Payment(s) in Draft</span>
+                <strong class="value" id="invoicesDraftSum">$23,432,123</strong>
+                <small class="subtext" id="invoicesDraftCount">123 invoices</small>
+              </div>
+            </article>
+            <article class="metric-card">
+              <div class="icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
+              <div class="card-info">
+                <span class="label">Payment(s) in due</span>
+                <strong class="value" id="invoicesDueSum">$432,123</strong>
+                <small class="subtext" id="invoicesDueCount">12 invoices</small>
+              </div>
+            </article>
+          </section>
+
+          <!-- Search & filter bar identical to mockup -->
+          <div class="table-filter-bar">
+            <div class="search-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" placeholder="Search for invoice" aria-label="Search invoice list" id="invoiceSearchInput" />
+            </div>
+            <button class="btn btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></rect><line x1="8" y1="2" x2="8" y2="6"></rect><line x1="3" y1="10" x2="21" y2="10"></rect></svg>
+              Show by date
+            </button>
+            <button class="btn btn-secondary">
+              Type
+            </button>
+          </div>
+
+          <!-- Invoices Table matching layout mockup -->
+          <div class="table-container">
+            <table class="data-table" role="table" aria-label="Invoices list">
+              <thead>
+                <tr>
+                  <th>Invoice name</th>
+                  <th>Invoice number</th>
+                  <th>Customer</th>
+                  <th>Status</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody id="invoicesTableBody">
+                <!-- Populated dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- View 3: Settlements Timeline -->
+        <section class="view" id="settlement">
+          <div class="view-header-flex">
+            <div class="view-title-block">
+              <h2>Settlements</h2>
+              <p>Settlement records connect invoice memos to Stellar transaction hashes.</p>
+            </div>
+            <button class="btn btn-secondary">Export CSV</button>
+          </div>
+
+          <div class="timeline-container">
+            <div class="timeline-stepper">
+              <div class="timeline-step completed">
+                <div class="timeline-icon">✓</div>
+                <h4>01 Invoice created</h4>
+                <p>Client receives a USDC payment link.</p>
+              </div>
+              <div class="timeline-step completed">
+                <div class="timeline-icon">✓</div>
+                <h4>02 Memo matched</h4>
+                <p>Payment watcher confirms amount and memo.</p>
+              </div>
+              <div class="timeline-step active">
+                <div class="timeline-icon">03</div>
+                <h4>03 Webhook sent</h4>
+                <p>Merchant backend receives settlement proof.</p>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-icon">04</div>
+                <h4>04 Receipt exported</h4>
+                <p>Accounting record includes transaction hash.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- View 4: Addresses (New view) -->
+        <section class="view" id="addresses">
+          <div class="view-header-flex">
+            <div class="view-title-block">
+              <h2>Settlement Addresses</h2>
+              <p>Active deposit addresses on the Stellar network for webhook auto-settlements.</p>
+            </div>
+          </div>
+
+          <div class="addresses-grid">
+            <article class="address-card">
+              <div class="address-card-header">
+                <h3>Stellar USDC Settlement</h3>
+                <span class="address-status">Active</span>
+              </div>
+              <div class="address-key-block">
+                <span class="address-key" id="usdcAddressKey">GBXXUSDCSETTLEKEYXXXXXXXXXXXXXXXYUSDC</span>
+                <button class="address-copy-btn" title="Copy address" data-copy-target="usdcAddressKey">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+              <div class="address-qr-block">
+                <div class="qr-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="10" y="10" width="25" height="25" />
+                    <rect x="15" y="15" width="15" height="15" />
+                    <rect x="65" y="10" width="25" height="25" />
+                    <rect x="70" y="15" width="15" height="15" />
+                    <rect x="10" y="65" width="25" height="25" />
+                    <rect x="15" y="70" width="15" height="15" />
+                    <rect x="45" y="45" width="10" height="10" />
+                    <rect x="75" y="75" width="15" height="15" />
+                  </svg>
+                </div>
+                <div class="qr-details">
+                  <span>USDC Trustline Established</span>
+                  <p>Stellar Asset: USDC-GBXX</p>
                 </div>
               </div>
-              <div class="checkout-total">
-                <small>Total due</small>
-                <strong id="previewAmount">$1,240.00</strong>
+            </article>
+
+            <article class="address-card">
+              <div class="address-card-header">
+                <h3>Stellar Native (XLM)</h3>
+                <span class="address-status">Active</span>
               </div>
-              <button class="green-button">Pay invoice</button>
-            </section>
+              <div class="address-key-block">
+                <span class="address-key" id="xlmAddressKey">GBXXNATIVEXLMSETTLEKEYXXXXXXXXXXXXXXNATIVE</span>
+                <button class="address-copy-btn" title="Copy address" data-copy-target="xlmAddressKey">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+              <div class="address-qr-block">
+                <div class="qr-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="10" y="10" width="25" height="25" />
+                    <rect x="15" y="15" width="15" height="15" />
+                    <rect x="65" y="10" width="25" height="25" />
+                    <rect x="70" y="15" width="15" height="15" />
+                    <rect x="10" y="65" width="25" height="25" />
+                    <rect x="15" y="70" width="15" height="15" />
+                    <rect x="45" y="45" width="10" height="10" />
+                    <rect x="75" y="75" width="15" height="15" />
+                  </svg>
+                </div>
+                <div class="qr-details">
+                  <span>Native XLM Bridge</span>
+                  <p>Stellar Native Lumens</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="address-card">
+              <div class="address-card-header">
+                <h3>Stellar EURC Settlement</h3>
+                <span class="address-status">Active</span>
+              </div>
+              <div class="address-key-block">
+                <span class="address-key" id="eurcAddressKey">GBXXEURCSETTLEKEYXXXXXXXXXXXXXXEURC</span>
+                <button class="address-copy-btn" title="Copy address" data-copy-target="eurcAddressKey">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+              <div class="address-qr-block">
+                <div class="qr-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="10" y="10" width="25" height="25" />
+                    <rect x="15" y="15" width="15" height="15" />
+                    <rect x="65" y="10" width="25" height="25" />
+                    <rect x="70" y="15" width="15" height="15" />
+                    <rect x="10" y="65" width="25" height="25" />
+                    <rect x="15" y="70" width="15" height="15" />
+                    <rect x="45" y="45" width="10" height="10" />
+                    <rect x="75" y="75" width="15" height="15" />
+                  </svg>
+                </div>
+                <div class="qr-details">
+                  <span>EURC Trustline Established</span>
+                  <p>Stellar Asset: EURC-GBXX</p>
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 
-        <section class="view" id="settlement">
-          <div class="page-intro">
-            <p>Settlement records connect invoice memos to Stellar transaction hashes.</p>
-            <button class="report-button">Export CSV</button>
-          </div>
-          <section class="timeline-panel">
-            <article>
-              <span>01</span>
-              <strong>Invoice created</strong>
-              <small>Client receives a USDC payment link.</small>
-            </article>
-            <article>
-              <span>02</span>
-              <strong>Memo matched</strong>
-              <small>Payment watcher confirms amount and memo.</small>
-            </article>
-            <article>
-              <span>03</span>
-              <strong>Webhook sent</strong>
-              <small>Merchant backend receives settlement proof.</small>
-            </article>
-            <article>
-              <span>04</span>
-              <strong>Receipt exported</strong>
-              <small>Accounting record includes transaction hash.</small>
-            </article>
-          </section>
-        </section>
-
+        <!-- View 5: Developers API Console -->
         <section class="view" id="api">
-          <div class="page-intro">
-            <p>Typed routes for invoice creation, settlement events, and Stellar webhook intake.</p>
-            <button class="report-button">Copy Snippet</button>
+          <div class="view-header-flex">
+            <div class="view-title-block">
+              <h2>Developers</h2>
+              <p>Typed routes for invoice creation, settlement events, and Stellar webhook intake.</p>
+            </div>
           </div>
-          <section class="code-panel">
-            <pre><code>await fetch("/invoices", {
+
+          <div class="code-card">
+            <header class="code-card-header">
+              <h3>HTTP API integration</h3>
+              <button class="code-copy-btn" id="apiCopySnippetBtn">Copy Snippet</button>
+            </header>
+            <pre class="code-block-pre"><code id="apiCodeSnippet">await fetch("https://api.stellarsettle.dev/invoices", {
   method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer sk_live_stellarsettle_key_2048"
+  },
   body: JSON.stringify({
     client: "Kora Design Studio",
     amount: "1240.00",
@@ -245,9 +465,82 @@
     dueDate: "2026-06-15"
   })
 });</code></pre>
-          </section>
+          </div>
         </section>
       </main>
+    </div>
+
+    <!-- Invoice Creation Modal (Glassmorphic) -->
+    <div class="modal-overlay" id="invoiceModal">
+      <div class="modal-container">
+        <!-- Modal Left Side: Builder Form -->
+        <div class="modal-left">
+          <header class="modal-header">
+            <h3>Invoice Builder</h3>
+            <p>Generate Stellar USDC payment links and watch memos.</p>
+          </header>
+          
+          <div class="form-group">
+            <label for="clientName">Client Name</label>
+            <input type="text" id="clientName" value="Kora Design Studio" placeholder="e.g. Kora Design Studio" />
+          </div>
+
+          <div class="form-group">
+            <label for="invoiceAmount">Amount (USDC)</label>
+            <input type="number" id="invoiceAmount" value="1240.00" step="0.01" min="0.01" placeholder="0.00" />
+          </div>
+
+          <div class="form-group">
+            <label for="dueDate">Due Date</label>
+            <input type="date" id="dueDate" value="2026-06-15" />
+          </div>
+
+          <button class="btn btn-primary" style="margin-top: 10px; width: 100%; justify-content: center;" id="createInvoice">
+            Generate Stellar Invoice Link
+          </button>
+
+          <div class="link-box-container">
+            <span class="link-box-label">Payment Link Url</span>
+            <div class="link-box" id="paymentLink">Click generate link to create Stellar payment rail...</div>
+          </div>
+        </div>
+
+        <!-- Modal Right Side: Checkout Card Preview -->
+        <div class="modal-right">
+          <button class="modal-close" id="invoiceModalClose">&times;</button>
+          
+          <div class="checkout-card">
+            <div class="checkout-brand">
+              <div class="avatar">SS</div>
+              <div class="brand-info">
+                <h4 id="previewClient">Kora Design Studio</h4>
+                <p>Invoice #SS-TEMP</p>
+              </div>
+            </div>
+            <div class="checkout-divider"></div>
+            <div class="checkout-details">
+              <div class="checkout-detail-row">
+                <span class="label">Merchant</span>
+                <span class="val">StellarSettle LLC</span>
+              </div>
+              <div class="checkout-detail-row">
+                <span class="label">Due Date</span>
+                <span class="val" id="previewDueDate">2026-06-15</span>
+              </div>
+              <div class="checkout-detail-row">
+                <span class="label">Asset Network</span>
+                <span class="val">Stellar (USDC)</span>
+              </div>
+            </div>
+            <div class="checkout-divider"></div>
+            <div class="checkout-total-row">
+              <span class="label">Total Due</span>
+              <strong class="val" id="previewAmount">$1,240.00</strong>
+            </div>
+            <button class="checkout-pay-btn" disabled style="opacity: 0.8; cursor: not-allowed;">Pay invoice</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script type="module" src="scripts/app.js"></script>
